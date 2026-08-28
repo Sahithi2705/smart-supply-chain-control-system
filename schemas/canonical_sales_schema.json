@@ -1,0 +1,56 @@
+{
+  "table_name": "canonical_sales",
+  "description": "Standardized sales data for the Smart Supply Chain Control Tower",
+  "columns": [
+    {
+      "name": "sales_date",
+      "type": "date",
+      "nullable": false
+    },
+    {
+      "name": "sku",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "store_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "quantity_sold",
+      "type": "integer",
+      "nullable": false
+    },
+    {
+      "name": "unit_price",
+      "type": "double",
+      "nullable": true
+    },
+    {
+      "name": "dept_id",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "category_id",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "state_id",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "source_system",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "source_record_id",
+      "type": "string",
+      "nullable": false
+    }
+  ]
+}
