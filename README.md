@@ -81,6 +81,11 @@ Phase 1 - Development Environment and Git Setup
 8\. Automation \& Orchestration
 
 9\. NLP / Language Services
+10\. Microservices \& API Gateway
+
+11\. Dashboard / Frontend
+
+12\. DevOps, CI/CD, Monitoring \& Governance
 
 
 
@@ -195,9 +200,5 @@ Latest verification: **5 tests passed**. Python syntax checks also passed for th
 - Demand forecasting, inventory optimization, and automated replenishment remain future integration steps.
 
 
-10\. Microservices \& API Gateway
 
-11\. Dashboard / Frontend
-
-12\. DevOps, CI/CD, Monitoring \& Governance
 
