@@ -27,3 +27,8 @@ data/curated/
 # OS
 .DS_Store
 Thumbs.db
+# Windows-generated files
+desktop.ini
+
+# Keep the root Docker Compose configuration as the single source
+tests/docker-compose.yml
