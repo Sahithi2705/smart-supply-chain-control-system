@@ -1,0 +1,54 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ListCanonicalBucketPrefixes",
+      "Effect": "Allow",
+      "Action": ["s3:ListBucket"],
+      "Resource": "arn:aws:s3:::smart-supply-chain-data-2026",
+      "Condition": {"StringLike": {"s3:prefix": ["raw/*", "curated/*", "athena-results/*"]}}
+    },
+    {
+      "Sid": "ReadRawAndCuratedWriteCuratedAndResults",
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:PutObject"],
+      "Resource": [
+        "arn:aws:s3:::smart-supply-chain-data-2026/raw/*",
+        "arn:aws:s3:::smart-supply-chain-data-2026/curated/*",
+        "arn:aws:s3:::smart-supply-chain-data-2026/athena-results/*"
+      ]
+    },
+    {
+      "Sid": "AthenaQueryExecution",
+      "Effect": "Allow",
+      "Action": [
+        "athena:StartQueryExecution", "athena:GetQueryExecution", "athena:GetQueryResults",
+        "athena:StopQueryExecution", "athena:GetWorkGroup", "athena:ListWorkGroups"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "GlueCatalogReadForAthena",
+      "Effect": "Allow",
+      "Action": [
+        "glue:GetDatabase", "glue:GetDatabases", "glue:GetTable", "glue:GetTables",
+        "glue:GetPartition", "glue:GetPartitions"
+      ],
+      "Resource": [
+        "arn:aws:glue:ap-south-1:<ACCOUNT_ID>:catalog",
+        "arn:aws:glue:ap-south-1:<ACCOUNT_ID>:database/supply_chain_canonical",
+        "arn:aws:glue:ap-south-1:<ACCOUNT_ID>:table/supply_chain_canonical/*"
+      ]
+    },
+    {
+      "Sid": "CreateAndUpdateCanonicalGlueCatalog",
+      "Effect": "Allow",
+      "Action": ["glue:CreateDatabase", "glue:CreateTable", "glue:UpdateTable"],
+      "Resource": [
+        "arn:aws:glue:ap-south-1:<ACCOUNT_ID>:catalog",
+        "arn:aws:glue:ap-south-1:<ACCOUNT_ID>:database/supply_chain_canonical",
+        "arn:aws:glue:ap-south-1:<ACCOUNT_ID>:table/supply_chain_canonical/*"
+      ]
+    }
+  ]
+}

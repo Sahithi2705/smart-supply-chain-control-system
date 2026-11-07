@@ -1,34 +1,41 @@
-# Python
+
+# Python cache
 __pycache__/
 *.py[cod]
 *.pyo
 
-# Virtual environment
+# Virtual environments
 .venv/
+venv/
+env/
 
 # Environment variables and secrets
 .env
 .env.*
-
-# AWS credentials
 .aws/
 
 # Raw and generated datasets
 data/raw/
+data/interim/
 data/processed/
 data/curated/
+data/database/
+*.duckdb
+*.duckdb.wal
 
-# Jupyter
+# Profiling and temporary files
 .ipynb_checkpoints/
+*.tmp
+*.log
 
 # IDE
 .vscode/
+.idea/
 
-# OS
+# OS files
 .DS_Store
 Thumbs.db
-# Windows-generated files
 desktop.ini
 
-# Keep the root Docker Compose configuration as the single source
+# Preserve Docker Compose as the root configuration
 tests/docker-compose.yml

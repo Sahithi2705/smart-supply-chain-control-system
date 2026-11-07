@@ -1,0 +1,716 @@
+[
+  {
+    "source": "m5",
+    "check": "dim_product_exists",
+    "passed": true,
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\m5\\dim_product\\part-00000.parquet"
+  },
+  {
+    "source": "m5",
+    "check": "dim_product_row_count",
+    "passed": true,
+    "detail": "3049"
+  },
+  {
+    "source": "m5",
+    "check": "dim_product_expected_row_count",
+    "passed": true,
+    "detail": "actual=3049; expected=3049"
+  },
+  {
+    "source": "m5",
+    "check": "dim_product_pk_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "dim_product_pk_duplicates",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "dim_product_source_metadata_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "dim_store_exists",
+    "passed": true,
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\m5\\dim_store\\part-00000.parquet"
+  },
+  {
+    "source": "m5",
+    "check": "dim_store_row_count",
+    "passed": true,
+    "detail": "10"
+  },
+  {
+    "source": "m5",
+    "check": "dim_store_expected_row_count",
+    "passed": true,
+    "detail": "actual=10; expected=10"
+  },
+  {
+    "source": "m5",
+    "check": "dim_store_pk_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "dim_store_pk_duplicates",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "dim_store_source_metadata_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "dim_date_exists",
+    "passed": true,
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\m5\\dim_date\\part-00000.parquet"
+  },
+  {
+    "source": "m5",
+    "check": "dim_date_row_count",
+    "passed": true,
+    "detail": "1969"
+  },
+  {
+    "source": "m5",
+    "check": "dim_date_expected_row_count",
+    "passed": true,
+    "detail": "actual=1969; expected=1969"
+  },
+  {
+    "source": "m5",
+    "check": "dim_date_pk_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "dim_date_pk_duplicates",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "dim_date_source_metadata_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "fact_sell_prices_exists",
+    "passed": true,
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\m5\\fact_sell_prices\\part-00000.parquet"
+  },
+  {
+    "source": "m5",
+    "check": "fact_sell_prices_row_count",
+    "passed": true,
+    "detail": "6841121"
+  },
+  {
+    "source": "m5",
+    "check": "fact_sell_prices_expected_row_count",
+    "passed": true,
+    "detail": "actual=6841121; expected=6841121"
+  },
+  {
+    "source": "m5",
+    "check": "fact_sell_prices_pk_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "fact_sell_prices_pk_duplicates",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "fact_sell_prices_source_metadata_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "fact_sales_exists",
+    "passed": true,
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\m5\\fact_sales\\part-00000.parquet"
+  },
+  {
+    "source": "m5",
+    "check": "fact_sales_row_count",
+    "passed": true,
+    "detail": "59181090"
+  },
+  {
+    "source": "m5",
+    "check": "fact_sales_expected_row_count",
+    "passed": true,
+    "detail": "actual=59181090; expected=59181090"
+  },
+  {
+    "source": "m5",
+    "check": "fact_sales_pk_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "fact_sales_pk_duplicates",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "fact_sales_source_metadata_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "fact_orders_exists",
+    "passed": true,
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\olist\\fact_orders\\part-00000.parquet"
+  },
+  {
+    "source": "olist",
+    "check": "fact_orders_row_count",
+    "passed": true,
+    "detail": "99441"
+  },
+  {
+    "source": "olist",
+    "check": "fact_orders_expected_row_count",
+    "passed": true,
+    "detail": "actual=99441; expected=99441"
+  },
+  {
+    "source": "olist",
+    "check": "fact_orders_pk_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "fact_orders_pk_duplicates",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "fact_orders_source_metadata_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "fact_order_items_exists",
+    "passed": true,
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\olist\\fact_order_items\\part-00000.parquet"
+  },
+  {
+    "source": "olist",
+    "check": "fact_order_items_row_count",
+    "passed": true,
+    "detail": "112650"
+  },
+  {
+    "source": "olist",
+    "check": "fact_order_items_expected_row_count",
+    "passed": true,
+    "detail": "actual=112650; expected=112650"
+  },
+  {
+    "source": "olist",
+    "check": "fact_order_items_pk_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "fact_order_items_pk_duplicates",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "fact_order_items_source_metadata_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "dim_customer_exists",
+    "passed": true,
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\olist\\dim_customer\\part-00000.parquet"
+  },
+  {
+    "source": "olist",
+    "check": "dim_customer_row_count",
+    "passed": true,
+    "detail": "99441"
+  },
+  {
+    "source": "olist",
+    "check": "dim_customer_expected_row_count",
+    "passed": true,
+    "detail": "actual=99441; expected=99441"
+  },
+  {
+    "source": "olist",
+    "check": "dim_customer_pk_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "dim_customer_pk_duplicates",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "dim_customer_source_metadata_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "dim_seller_exists",
+    "passed": true,
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\olist\\dim_seller\\part-00000.parquet"
+  },
+  {
+    "source": "olist",
+    "check": "dim_seller_row_count",
+    "passed": true,
+    "detail": "3095"
+  },
+  {
+    "source": "olist",
+    "check": "dim_seller_expected_row_count",
+    "passed": true,
+    "detail": "actual=3095; expected=3095"
+  },
+  {
+    "source": "olist",
+    "check": "dim_seller_pk_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "dim_seller_pk_duplicates",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "dim_seller_source_metadata_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "dim_olist_product_exists",
+    "passed": true,
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\olist\\dim_olist_product\\part-00000.parquet"
+  },
+  {
+    "source": "olist",
+    "check": "dim_olist_product_row_count",
+    "passed": true,
+    "detail": "32951"
+  },
+  {
+    "source": "olist",
+    "check": "dim_olist_product_expected_row_count",
+    "passed": true,
+    "detail": "actual=32951; expected=32951"
+  },
+  {
+    "source": "olist",
+    "check": "dim_olist_product_pk_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "dim_olist_product_pk_duplicates",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "dim_olist_product_source_metadata_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "fact_order_payments_exists",
+    "passed": true,
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\olist\\fact_order_payments\\part-00000.parquet"
+  },
+  {
+    "source": "olist",
+    "check": "fact_order_payments_row_count",
+    "passed": true,
+    "detail": "103886"
+  },
+  {
+    "source": "olist",
+    "check": "fact_order_payments_expected_row_count",
+    "passed": true,
+    "detail": "actual=103886; expected=103886"
+  },
+  {
+    "source": "olist",
+    "check": "fact_order_payments_pk_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "fact_order_payments_pk_duplicates",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "fact_order_payments_source_metadata_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "fact_procurement_exists",
+    "passed": true,
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\scms\\fact_procurement\\part-00000.parquet"
+  },
+  {
+    "source": "scms",
+    "check": "fact_procurement_row_count",
+    "passed": true,
+    "detail": "10324"
+  },
+  {
+    "source": "scms",
+    "check": "fact_procurement_expected_row_count",
+    "passed": true,
+    "detail": "actual=10324; expected=10324"
+  },
+  {
+    "source": "scms",
+    "check": "fact_procurement_pk_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "fact_procurement_pk_duplicates",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "fact_procurement_source_metadata_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "fact_delivery_exists",
+    "passed": true,
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\scms\\fact_delivery\\part-00000.parquet"
+  },
+  {
+    "source": "scms",
+    "check": "fact_delivery_row_count",
+    "passed": true,
+    "detail": "10324"
+  },
+  {
+    "source": "scms",
+    "check": "fact_delivery_expected_row_count",
+    "passed": true,
+    "detail": "actual=10324; expected=10324"
+  },
+  {
+    "source": "scms",
+    "check": "fact_delivery_pk_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "fact_delivery_pk_duplicates",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "fact_delivery_source_metadata_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "dim_supplier_exists",
+    "passed": true,
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\scms\\dim_supplier\\part-00000.parquet"
+  },
+  {
+    "source": "scms",
+    "check": "dim_supplier_row_count",
+    "passed": true,
+    "detail": "805"
+  },
+  {
+    "source": "scms",
+    "check": "dim_supplier_expected_row_count",
+    "passed": true,
+    "detail": "actual=805; expected=805"
+  },
+  {
+    "source": "scms",
+    "check": "dim_supplier_pk_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "dim_supplier_pk_duplicates",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "dim_supplier_source_metadata_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "dim_shipment_exists",
+    "passed": true,
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\scms\\dim_shipment\\part-00000.parquet"
+  },
+  {
+    "source": "scms",
+    "check": "dim_shipment_row_count",
+    "passed": true,
+    "detail": "7030"
+  },
+  {
+    "source": "scms",
+    "check": "dim_shipment_expected_row_count",
+    "passed": true,
+    "detail": "actual=7030; expected=7030"
+  },
+  {
+    "source": "scms",
+    "check": "dim_shipment_pk_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "dim_shipment_pk_duplicates",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "dim_shipment_source_metadata_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "dim_product_scms_exists",
+    "passed": true,
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\scms\\dim_product_scms\\part-00000.parquet"
+  },
+  {
+    "source": "scms",
+    "check": "dim_product_scms_row_count",
+    "passed": true,
+    "detail": "184"
+  },
+  {
+    "source": "scms",
+    "check": "dim_product_scms_expected_row_count",
+    "passed": true,
+    "detail": "actual=184; expected=184"
+  },
+  {
+    "source": "scms",
+    "check": "dim_product_scms_pk_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "dim_product_scms_pk_duplicates",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "dim_product_scms_source_metadata_nulls",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "fact_sales_sku_fk",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "fact_sales_store_fk",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "fact_sales_date_fk",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "fact_sell_prices_product_fk",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "fact_sell_prices_store_fk",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "fact_orders_customer_fk",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "fact_items_order_fk",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "fact_items_product_fk",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "fact_items_seller_fk",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "fact_payments_order_fk",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "fact_procurement_supplier_fk",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "fact_procurement_product_fk",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "fact_delivery_shipment_fk",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "fact_delivery_supplier_fk",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "fact_delivery_product_fk",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "negative_sales_quantity",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "m5",
+    "check": "negative_sell_price",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "negative_item_price_or_freight",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "negative_payment_value",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "negative_procurement_values",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "olist",
+    "check": "order_delivery_before_purchase",
+    "passed": true,
+    "detail": "0"
+  },
+  {
+    "source": "scms",
+    "check": "early_deliveries_informational",
+    "passed": true,
+    "detail": "2,814 deliveries occurred before scheduled dates. Original dates preserved."
+  },
+  {
+    "source": "m5",
+    "check": "sales_rows_without_weekly_price",
+    "passed": true,
+    "detail": "12,299,413 rows without weekly price. Reported, not dropped or imputed."
+  }
+]

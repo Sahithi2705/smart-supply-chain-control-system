@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.aws/
+data/raw/**
+!data/raw/**/.gitkeep
+data/interim/**
+data/curated/**
+data/database/**
+!data/interim/.gitkeep
+!data/curated/**/.gitkeep
+!data/database/.gitkeep
+*.duckdb.wal
+
+transformations/etl_m5_backup.py
