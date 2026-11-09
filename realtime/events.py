@@ -1,5 +1,7 @@
+
 from dataclasses import dataclass
 from datetime import datetime
+from uuid import uuid4
 
 
 @dataclass
@@ -13,3 +15,8 @@ class ShipmentEvent:
     planned_eta: datetime
     current_eta: datetime
     timestamp: datetime
+    event_id: str = ""
+
+    def __post_init__(self):
+        if not self.event_id:
+            self.event_id = str(uuid4())

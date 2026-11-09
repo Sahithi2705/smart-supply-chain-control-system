@@ -4,7 +4,10 @@ from dataclasses import asdict
 from datetime import datetime
 
 from kafka import KafkaProducer
-from events import ShipmentEvent
+try:
+    from .events import ShipmentEvent
+except ImportError:
+    from events import ShipmentEvent
 
 from kafka.serializer import Serializer
 
