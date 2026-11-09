@@ -1,96 +1,80 @@
 source,check,passed,detail
-m5,dim_product_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\m5\dim_product\part-00000.parquet
-m5,dim_product_row_count,True,3049
+m5,dim_product_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\m5_canonical_v2\dim_product\part-00000.parquet
 m5,dim_product_expected_row_count,True,actual=3049; expected=3049
 m5,dim_product_pk_nulls,True,0
 m5,dim_product_pk_duplicates,True,0
 m5,dim_product_source_metadata_nulls,True,0
-m5,dim_store_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\m5\dim_store\part-00000.parquet
-m5,dim_store_row_count,True,10
+m5,dim_store_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\m5_canonical_v2\dim_store\part-00000.parquet
 m5,dim_store_expected_row_count,True,actual=10; expected=10
 m5,dim_store_pk_nulls,True,0
 m5,dim_store_pk_duplicates,True,0
 m5,dim_store_source_metadata_nulls,True,0
-m5,dim_date_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\m5\dim_date\part-00000.parquet
-m5,dim_date_row_count,True,1969
+m5,dim_date_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\m5_canonical_v2\dim_date\part-00000.parquet
 m5,dim_date_expected_row_count,True,actual=1969; expected=1969
 m5,dim_date_pk_nulls,True,0
 m5,dim_date_pk_duplicates,True,0
 m5,dim_date_source_metadata_nulls,True,0
-m5,fact_sell_prices_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\m5\fact_sell_prices\part-00000.parquet
-m5,fact_sell_prices_row_count,True,6841121
+m5,fact_sell_prices_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\m5_canonical_v2\fact_sell_prices\part-00000.parquet
 m5,fact_sell_prices_expected_row_count,True,actual=6841121; expected=6841121
 m5,fact_sell_prices_pk_nulls,True,0
 m5,fact_sell_prices_pk_duplicates,True,0
 m5,fact_sell_prices_source_metadata_nulls,True,0
-m5,fact_sales_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\m5\fact_sales\part-00000.parquet
-m5,fact_sales_row_count,True,59181090
+m5,fact_sales_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\m5_canonical_v2\fact_sales\part-00000.parquet
 m5,fact_sales_expected_row_count,True,actual=59181090; expected=59181090
 m5,fact_sales_pk_nulls,True,0
 m5,fact_sales_pk_duplicates,True,0
 m5,fact_sales_source_metadata_nulls,True,0
 olist,fact_orders_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\olist\fact_orders\part-00000.parquet
-olist,fact_orders_row_count,True,99441
 olist,fact_orders_expected_row_count,True,actual=99441; expected=99441
 olist,fact_orders_pk_nulls,True,0
 olist,fact_orders_pk_duplicates,True,0
 olist,fact_orders_source_metadata_nulls,True,0
 olist,fact_order_items_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\olist\fact_order_items\part-00000.parquet
-olist,fact_order_items_row_count,True,112650
 olist,fact_order_items_expected_row_count,True,actual=112650; expected=112650
 olist,fact_order_items_pk_nulls,True,0
 olist,fact_order_items_pk_duplicates,True,0
 olist,fact_order_items_source_metadata_nulls,True,0
 olist,dim_customer_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\olist\dim_customer\part-00000.parquet
-olist,dim_customer_row_count,True,99441
 olist,dim_customer_expected_row_count,True,actual=99441; expected=99441
 olist,dim_customer_pk_nulls,True,0
 olist,dim_customer_pk_duplicates,True,0
 olist,dim_customer_source_metadata_nulls,True,0
 olist,dim_seller_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\olist\dim_seller\part-00000.parquet
-olist,dim_seller_row_count,True,3095
 olist,dim_seller_expected_row_count,True,actual=3095; expected=3095
 olist,dim_seller_pk_nulls,True,0
 olist,dim_seller_pk_duplicates,True,0
 olist,dim_seller_source_metadata_nulls,True,0
 olist,dim_olist_product_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\olist\dim_olist_product\part-00000.parquet
-olist,dim_olist_product_row_count,True,32951
 olist,dim_olist_product_expected_row_count,True,actual=32951; expected=32951
 olist,dim_olist_product_pk_nulls,True,0
 olist,dim_olist_product_pk_duplicates,True,0
 olist,dim_olist_product_source_metadata_nulls,True,0
 olist,fact_order_payments_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\olist\fact_order_payments\part-00000.parquet
-olist,fact_order_payments_row_count,True,103886
 olist,fact_order_payments_expected_row_count,True,actual=103886; expected=103886
 olist,fact_order_payments_pk_nulls,True,0
 olist,fact_order_payments_pk_duplicates,True,0
 olist,fact_order_payments_source_metadata_nulls,True,0
 scms,fact_procurement_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\scms\fact_procurement\part-00000.parquet
-scms,fact_procurement_row_count,True,10324
 scms,fact_procurement_expected_row_count,True,actual=10324; expected=10324
 scms,fact_procurement_pk_nulls,True,0
 scms,fact_procurement_pk_duplicates,True,0
 scms,fact_procurement_source_metadata_nulls,True,0
 scms,fact_delivery_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\scms\fact_delivery\part-00000.parquet
-scms,fact_delivery_row_count,True,10324
 scms,fact_delivery_expected_row_count,True,actual=10324; expected=10324
 scms,fact_delivery_pk_nulls,True,0
 scms,fact_delivery_pk_duplicates,True,0
 scms,fact_delivery_source_metadata_nulls,True,0
 scms,dim_supplier_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\scms\dim_supplier\part-00000.parquet
-scms,dim_supplier_row_count,True,805
 scms,dim_supplier_expected_row_count,True,actual=805; expected=805
 scms,dim_supplier_pk_nulls,True,0
 scms,dim_supplier_pk_duplicates,True,0
 scms,dim_supplier_source_metadata_nulls,True,0
 scms,dim_shipment_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\scms\dim_shipment\part-00000.parquet
-scms,dim_shipment_row_count,True,7030
 scms,dim_shipment_expected_row_count,True,actual=7030; expected=7030
 scms,dim_shipment_pk_nulls,True,0
 scms,dim_shipment_pk_duplicates,True,0
 scms,dim_shipment_source_metadata_nulls,True,0
 scms,dim_product_scms_exists,True,C:\cspm\smart-supply-chain-control-system-main\smart-supply-chain-control-system\data\curated\scms\dim_product_scms\part-00000.parquet
-scms,dim_product_scms_row_count,True,184
 scms,dim_product_scms_expected_row_count,True,actual=184; expected=184
 scms,dim_product_scms_pk_nulls,True,0
 scms,dim_product_scms_pk_duplicates,True,0

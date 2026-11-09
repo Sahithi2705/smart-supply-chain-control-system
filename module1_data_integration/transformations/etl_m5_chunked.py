@@ -18,10 +18,9 @@ RAW = ROOT / "data" / "raw" / "m5"
 
 OUTPUT = (
     ROOT
-    / "module1_data_integration"
     / "data"
     / "interim"
-    / "m5_full"
+    / "m5_full_canonical_v2"
     / "fact_sales"
 )
 
@@ -32,12 +31,8 @@ PRICES_FILE = RAW / "sell_prices.csv"
 
 CHUNK_SIZE = 100
 
-# Keep True for testing.
-# Change to False only after the sample test passes.
 TEST_MODE = False
 TEST_CHUNKS = 2
-
-OUTPUT.mkdir(parents=True, exist_ok=True)
 
 OUTPUT_FILE = OUTPUT / "part-00000.parquet"
 
@@ -56,7 +51,10 @@ def load_lookups():
         ["d", "date", "wm_yr_wk"]
     ].copy()
 
-    calendar["date"] = pd.to_datetime(calendar["date"])
+    calendar["date"] = pd.to_datetime(
+        calendar["date"],
+        errors="raise"
+    ).dt.date
 
     if calendar["d"].duplicated().any():
         raise ValueError("Duplicate day IDs found in calendar.")
@@ -71,6 +69,16 @@ def load_lookups():
             "store_id": "string",
             "item_id": "string"
         }
+    )
+
+    prices["wm_yr_wk"] = pd.to_numeric(
+        prices["wm_yr_wk"],
+        errors="raise"
+    ).astype("int32")
+
+    prices["sell_price"] = pd.to_numeric(
+        prices["sell_price"],
+        errors="coerce"
     )
 
     if prices.duplicated(
@@ -160,7 +168,7 @@ def transform_chunk(chunk, day_columns, calendar, prices):
         "state_id"
     ]
 
-    # Convert wide data into long format
+    # Convert wide data into long format.
     long_sales = chunk.melt(
         id_vars=id_columns,
         value_vars=day_columns,
@@ -168,7 +176,7 @@ def transform_chunk(chunk, day_columns, calendar, prices):
         value_name="quantity_sold"
     )
 
-    # Join calendar
+    # Join calendar.
     result = long_sales.merge(
         calendar,
         on="d",
@@ -181,7 +189,7 @@ def transform_chunk(chunk, day_columns, calendar, prices):
             "Calendar join produced missing dates."
         )
 
-    # Join selling prices
+    # Join selling prices.
     result = result.merge(
         prices,
         on=["store_id", "item_id", "wm_yr_wk"],
@@ -189,18 +197,20 @@ def transform_chunk(chunk, day_columns, calendar, prices):
         validate="many_to_one"
     )
 
-    # Preserve missing prices as NULL
+    # Preserve missing prices as NULL.
     result["quantity_sold"] = result[
         "quantity_sold"
     ].astype("int64")
 
-    result["sell_price"] = result[
+    # Rename source price to canonical unit_price.
+    result["unit_price"] = result[
         "sell_price"
     ].astype("float64")
 
-    # Rename canonical fields
+    # Rename canonical fields.
     result = result.rename(
         columns={
+            "date": "sales_date",
             "item_id": "sku",
             "cat_id": "category_id"
         }
@@ -209,14 +219,14 @@ def transform_chunk(chunk, day_columns, calendar, prices):
     result["source_system"] = "M5"
     result["source_record_id"] = result["id"]
 
-    # Select canonical columns
+    # Select canonical columns.
     result = result[
         [
-            "date",
+            "sales_date",
             "sku",
             "store_id",
             "quantity_sold",
-            "sell_price",
+            "unit_price",
             "dept_id",
             "category_id",
             "state_id",
@@ -237,7 +247,6 @@ def transform_chunk(chunk, day_columns, calendar, prices):
 def write_dataset(calendar, prices, total_series):
 
     writer = None
-
     total_rows = 0
 
     datasets = [
@@ -259,7 +268,13 @@ def write_dataset(calendar, prices, total_series):
 
     try:
 
-        for dataset_name, file_path, day_count, first_day, expected_rows in datasets:
+        for (
+            dataset_name,
+            file_path,
+            day_count,
+            first_day,
+            expected_rows
+        ) in datasets:
 
             print("\n================================")
             print("Processing:", dataset_name)
@@ -270,12 +285,10 @@ def write_dataset(calendar, prices, total_series):
                 1913 if dataset_name == "validation" else 1941
             )
 
-            # Validation uses all 1913 days.
             if dataset_name == "validation":
 
                 day_columns = all_day_columns
 
-            # Evaluation uses only the additional 28 days.
             else:
 
                 day_columns = [
@@ -305,7 +318,6 @@ def write_dataset(calendar, prices, total_series):
                 start=1
             ):
 
-                # Limit processing during sample testing.
                 if TEST_MODE and chunk_number > TEST_CHUNKS:
                     break
 
@@ -373,10 +385,17 @@ def write_dataset(calendar, prices, total_series):
             if TEST_MODE:
 
                 expected_test_rows = (
-                    min(TEST_CHUNKS, (30_490 + CHUNK_SIZE - 1) // CHUNK_SIZE)
+                    min(
+                        TEST_CHUNKS,
+                        (total_series + CHUNK_SIZE - 1) // CHUNK_SIZE
+                    )
                     * CHUNK_SIZE
                     * day_count
                 )
+
+                # Account for a partial final chunk if needed.
+                if TEST_CHUNKS * CHUNK_SIZE > total_series:
+                    expected_test_rows = total_series * day_count
 
                 if dataset_rows != expected_test_rows:
 
@@ -461,7 +480,7 @@ def write_dataset(calendar, prices, total_series):
 
         print(
             "Sample missing prices:",
-            sample["sell_price"].isna().sum()
+            sample["unit_price"].isna().sum()
         )
 
         print("Sample verification passed.")
@@ -477,11 +496,28 @@ def main():
 
         raise FileExistsError(
             f"Output already exists: {OUTPUT_FILE}\n"
-            "Delete or rename the previous test output "
-            "before running again."
+            "Choose a new versioned output directory. "
+            "Existing outputs will not be overwritten."
         )
 
+    if not all(
+        path.exists()
+        for path in [
+            VALIDATION_FILE,
+            EVALUATION_FILE,
+            CALENDAR_FILE,
+            PRICES_FILE
+        ]
+    ):
+        raise FileNotFoundError(
+            "One or more required M5 raw CSV files are missing."
+        )
+
+    OUTPUT.mkdir(parents=True, exist_ok=True)
+
     print("Starting M5 chunked ETL...")
+    print("Output:", OUTPUT_FILE)
+    print("Test mode:", TEST_MODE)
 
     total_series = verify_series_ids()
 
@@ -497,5 +533,4 @@ def main():
 
 
 if __name__ == "__main__":
-
     main()

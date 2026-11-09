@@ -3,13 +3,7 @@
     "source": "m5",
     "check": "dim_product_exists",
     "passed": true,
-    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\m5\\dim_product\\part-00000.parquet"
-  },
-  {
-    "source": "m5",
-    "check": "dim_product_row_count",
-    "passed": true,
-    "detail": "3049"
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\m5_canonical_v2\\dim_product\\part-00000.parquet"
   },
   {
     "source": "m5",
@@ -39,13 +33,7 @@
     "source": "m5",
     "check": "dim_store_exists",
     "passed": true,
-    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\m5\\dim_store\\part-00000.parquet"
-  },
-  {
-    "source": "m5",
-    "check": "dim_store_row_count",
-    "passed": true,
-    "detail": "10"
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\m5_canonical_v2\\dim_store\\part-00000.parquet"
   },
   {
     "source": "m5",
@@ -75,13 +63,7 @@
     "source": "m5",
     "check": "dim_date_exists",
     "passed": true,
-    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\m5\\dim_date\\part-00000.parquet"
-  },
-  {
-    "source": "m5",
-    "check": "dim_date_row_count",
-    "passed": true,
-    "detail": "1969"
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\m5_canonical_v2\\dim_date\\part-00000.parquet"
   },
   {
     "source": "m5",
@@ -111,13 +93,7 @@
     "source": "m5",
     "check": "fact_sell_prices_exists",
     "passed": true,
-    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\m5\\fact_sell_prices\\part-00000.parquet"
-  },
-  {
-    "source": "m5",
-    "check": "fact_sell_prices_row_count",
-    "passed": true,
-    "detail": "6841121"
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\m5_canonical_v2\\fact_sell_prices\\part-00000.parquet"
   },
   {
     "source": "m5",
@@ -147,13 +123,7 @@
     "source": "m5",
     "check": "fact_sales_exists",
     "passed": true,
-    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\m5\\fact_sales\\part-00000.parquet"
-  },
-  {
-    "source": "m5",
-    "check": "fact_sales_row_count",
-    "passed": true,
-    "detail": "59181090"
+    "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\m5_canonical_v2\\fact_sales\\part-00000.parquet"
   },
   {
     "source": "m5",
@@ -187,12 +157,6 @@
   },
   {
     "source": "olist",
-    "check": "fact_orders_row_count",
-    "passed": true,
-    "detail": "99441"
-  },
-  {
-    "source": "olist",
     "check": "fact_orders_expected_row_count",
     "passed": true,
     "detail": "actual=99441; expected=99441"
@@ -220,12 +184,6 @@
     "check": "fact_order_items_exists",
     "passed": true,
     "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\olist\\fact_order_items\\part-00000.parquet"
-  },
-  {
-    "source": "olist",
-    "check": "fact_order_items_row_count",
-    "passed": true,
-    "detail": "112650"
   },
   {
     "source": "olist",
@@ -259,12 +217,6 @@
   },
   {
     "source": "olist",
-    "check": "dim_customer_row_count",
-    "passed": true,
-    "detail": "99441"
-  },
-  {
-    "source": "olist",
     "check": "dim_customer_expected_row_count",
     "passed": true,
     "detail": "actual=99441; expected=99441"
@@ -292,12 +244,6 @@
     "check": "dim_seller_exists",
     "passed": true,
     "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\olist\\dim_seller\\part-00000.parquet"
-  },
-  {
-    "source": "olist",
-    "check": "dim_seller_row_count",
-    "passed": true,
-    "detail": "3095"
   },
   {
     "source": "olist",
@@ -331,12 +277,6 @@
   },
   {
     "source": "olist",
-    "check": "dim_olist_product_row_count",
-    "passed": true,
-    "detail": "32951"
-  },
-  {
-    "source": "olist",
     "check": "dim_olist_product_expected_row_count",
     "passed": true,
     "detail": "actual=32951; expected=32951"
@@ -364,12 +304,6 @@
     "check": "fact_order_payments_exists",
     "passed": true,
     "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\olist\\fact_order_payments\\part-00000.parquet"
-  },
-  {
-    "source": "olist",
-    "check": "fact_order_payments_row_count",
-    "passed": true,
-    "detail": "103886"
   },
   {
     "source": "olist",
@@ -403,12 +337,6 @@
   },
   {
     "source": "scms",
-    "check": "fact_procurement_row_count",
-    "passed": true,
-    "detail": "10324"
-  },
-  {
-    "source": "scms",
     "check": "fact_procurement_expected_row_count",
     "passed": true,
     "detail": "actual=10324; expected=10324"
@@ -436,12 +364,6 @@
     "check": "fact_delivery_exists",
     "passed": true,
     "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\scms\\fact_delivery\\part-00000.parquet"
-  },
-  {
-    "source": "scms",
-    "check": "fact_delivery_row_count",
-    "passed": true,
-    "detail": "10324"
   },
   {
     "source": "scms",
@@ -475,12 +397,6 @@
   },
   {
     "source": "scms",
-    "check": "dim_supplier_row_count",
-    "passed": true,
-    "detail": "805"
-  },
-  {
-    "source": "scms",
     "check": "dim_supplier_expected_row_count",
     "passed": true,
     "detail": "actual=805; expected=805"
@@ -511,12 +427,6 @@
   },
   {
     "source": "scms",
-    "check": "dim_shipment_row_count",
-    "passed": true,
-    "detail": "7030"
-  },
-  {
-    "source": "scms",
     "check": "dim_shipment_expected_row_count",
     "passed": true,
     "detail": "actual=7030; expected=7030"
@@ -544,12 +454,6 @@
     "check": "dim_product_scms_exists",
     "passed": true,
     "detail": "C:\\cspm\\smart-supply-chain-control-system-main\\smart-supply-chain-control-system\\data\\curated\\scms\\dim_product_scms\\part-00000.parquet"
-  },
-  {
-    "source": "scms",
-    "check": "dim_product_scms_row_count",
-    "passed": true,
-    "detail": "184"
   },
   {
     "source": "scms",

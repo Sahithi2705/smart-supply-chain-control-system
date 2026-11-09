@@ -2,10 +2,11 @@
 from pathlib import Path
 import shutil
 
+import duckdb
 import pandas as pd
 import pyarrow.parquet as pq
 
-from config.settings import M5_FILES, CURATED
+from config.settings import M5_FILES, CURATED, INTERIM
 from transformations.common import write_parquet, assert_finite_numeric
 
 
@@ -13,21 +14,21 @@ from transformations.common import write_parquet, assert_finite_numeric
 # PATHS AND EXPECTED VALUES
 # ==========================================================
 
-MODULE_ROOT = Path(__file__).resolve().parents[1]
-
 SALES_SOURCE = (
-    MODULE_ROOT
-    / "data"
-    / "interim"
-    / "m5_full"
+    INTERIM
+    / "m5_full_canonical_v2"
     / "fact_sales"
     / "part-00000.parquet"
 )
 
+# Separate output to protect existing curated M5 files.
+OUTPUT = CURATED / "m5_canonical_v2"
+
 EXPECTED_SALES_ROWS = 59_181_090
 EXPECTED_PRODUCTS = 3_049
 EXPECTED_STORES = 10
-EXPECTED_DATES = 1_941
+EXPECTED_DATES = 1_969
+EXPECTED_PRICE_ROWS = 6_841_121
 
 
 # ==========================================================
@@ -45,32 +46,45 @@ def validate_primary_key(df, key, entity):
 
     if duplicates:
         raise ValueError(
-            f"{entity}: {duplicates} duplicate primary keys"
+            f"{entity}: {duplicates:,} duplicate primary keys"
         )
 
     print(f"{entity}: primary key validation passed")
 
 
+def check_output_is_safe():
+
+    if OUTPUT.exists() and any(OUTPUT.iterdir()):
+        raise FileExistsError(
+            f"Output directory is not empty: {OUTPUT}\n"
+            "Existing output will not be overwritten. "
+            "Choose a new versioned output directory."
+        )
+
+
 # ==========================================================
-# MAIN M5 ETL
+# MAIN M5 CANONICAL ETL
 # ==========================================================
 
 def run_m5():
 
     print("\n========== M5 CANONICAL ETL ==========")
 
-    output = CURATED / "m5"
-    output.mkdir(parents=True, exist_ok=True)
+    print("Intermediate input:", SALES_SOURCE)
+    print("Curated output:", OUTPUT)
+
+    # Protect previous output and existing curated data.
+    check_output_is_safe()
 
     # ------------------------------------------------------
-    # 1. VERIFY EXISTING SALES FACT
+    # 1. VERIFY CHUNKED SALES FACT
     # ------------------------------------------------------
 
-    print("\n[1/6] Verifying existing sales fact...")
+    print("\n[1/6] Verifying chunked sales fact...")
 
     if not SALES_SOURCE.exists():
         raise FileNotFoundError(
-            f"Existing sales fact not found: {SALES_SOURCE}"
+            f"M5 chunked sales fact not found: {SALES_SOURCE}"
         )
 
     sales_metadata = pq.ParquetFile(SALES_SOURCE).metadata
@@ -84,6 +98,29 @@ def run_m5():
 
     print(f"Verified sales rows: {sales_rows:,}")
 
+    sales_schema = pq.read_schema(SALES_SOURCE)
+
+    required_sales_columns = {
+        "sales_date",
+        "sku",
+        "store_id",
+        "quantity_sold",
+        "unit_price",
+        "source_system",
+        "source_record_id",
+        "d",
+    }
+
+    missing_columns = (
+        required_sales_columns - set(sales_schema.names)
+    )
+
+    if missing_columns:
+        raise ValueError(
+            f"M5 sales fact is missing columns: "
+            f"{sorted(missing_columns)}"
+        )
+
     # ------------------------------------------------------
     # 2. CREATE DIM_DATE
     # ------------------------------------------------------
@@ -92,16 +129,14 @@ def run_m5():
 
     calendar = pd.read_csv(M5_FILES["calendar"])
 
+    # Match the Parquet Date type in fact_sales.sales_date.
     calendar["date"] = pd.to_datetime(
         calendar["date"],
-        errors="coerce"
-    )
+        errors="raise"
+    ).dt.date
 
     if calendar["d"].duplicated().any():
-        raise ValueError("Duplicate M5 day IDs found.")
-
-    if calendar["date"].isna().any():
-        raise ValueError("Invalid dates found in M5 calendar.")
+        raise ValueError("Duplicate M5 calendar day IDs found.")
 
     dim_date = calendar.rename(
         columns={"d": "day_id"}
@@ -118,15 +153,21 @@ def run_m5():
         "dim_date"
     )
 
+    if len(dim_date) != EXPECTED_DATES:
+        raise ValueError(
+            f"Expected {EXPECTED_DATES:,} dates, "
+            f"found {len(dim_date):,}"
+        )
+
     write_parquet(
         dim_date,
-        output / "dim_date" / "part-00000.parquet"
+        OUTPUT / "dim_date" / "part-00000.parquet"
     )
 
     print(f"dim_date rows: {len(dim_date):,}")
 
     # ------------------------------------------------------
-    # 3. LOAD M5 PRODUCT AND STORE METADATA
+    # 3. CREATE DIM_PRODUCT AND DIM_STORE
     # ------------------------------------------------------
 
     print("\n[3/6] Creating dim_product and dim_store...")
@@ -139,7 +180,7 @@ def run_m5():
             "dept_id",
             "cat_id",
             "store_id",
-            "state_id"
+            "state_id",
         ],
         dtype="string"
     )
@@ -153,7 +194,7 @@ def run_m5():
         .rename(
             columns={
                 "item_id": "sku",
-                "cat_id": "category_id"
+                "cat_id": "category_id",
             }
         )
         .copy()
@@ -178,7 +219,7 @@ def run_m5():
 
     write_parquet(
         dim_product,
-        output / "dim_product" / "part-00000.parquet"
+        OUTPUT / "dim_product" / "part-00000.parquet"
     )
 
     print(f"dim_product rows: {len(dim_product):,}")
@@ -211,7 +252,7 @@ def run_m5():
 
     write_parquet(
         dim_store,
-        output / "dim_store" / "part-00000.parquet"
+        OUTPUT / "dim_store" / "part-00000.parquet"
     )
 
     print(f"dim_store rows: {len(dim_store):,}")
@@ -226,14 +267,14 @@ def run_m5():
         M5_FILES["prices"],
         dtype={
             "store_id": "string",
-            "item_id": "string"
+            "item_id": "string",
         }
     )
 
     prices["wm_yr_wk"] = pd.to_numeric(
         prices["wm_yr_wk"],
-        errors="coerce"
-    ).astype("Int32")
+        errors="raise"
+    ).astype("int32")
 
     prices["sell_price"] = pd.to_numeric(
         prices["sell_price"],
@@ -247,15 +288,18 @@ def run_m5():
     )
 
     prices = prices.rename(
-        columns={"item_id": "sku"}
+        columns={
+            "item_id": "sku",
+            "sell_price": "unit_price",
+        }
     )
 
     prices["source_system"] = "M5"
 
     prices["source_record_id"] = (
-        prices["store_id"].astype("string")
+        prices["store_id"]
         + ":"
-        + prices["sku"].astype("string")
+        + prices["sku"]
         + ":"
         + prices["wm_yr_wk"].astype("string")
     )
@@ -266,21 +310,38 @@ def run_m5():
         "fact_sell_prices"
     )
 
+    if len(prices) != EXPECTED_PRICE_ROWS:
+        raise ValueError(
+            f"Expected {EXPECTED_PRICE_ROWS:,} price rows, "
+            f"found {len(prices):,}"
+        )
+
+    prices = prices[
+        [
+            "store_id",
+            "sku",
+            "wm_yr_wk",
+            "unit_price",
+            "source_system",
+            "source_record_id",
+        ]
+    ]
+
     write_parquet(
         prices,
-        output / "fact_sell_prices" / "part-00000.parquet"
+        OUTPUT / "fact_sell_prices" / "part-00000.parquet"
     )
 
     print(f"fact_sell_prices rows: {len(prices):,}")
 
     # ------------------------------------------------------
-    # 5. COPY EXISTING FACT_SALES
+    # 5. INTEGRATE FACT_SALES
     # ------------------------------------------------------
 
-    print("\n[5/6] Integrating existing fact_sales...")
+    print("\n[5/6] Integrating fact_sales...")
 
     sales_output = (
-        output
+        OUTPUT
         / "fact_sales"
         / "part-00000.parquet"
     )
@@ -290,10 +351,8 @@ def run_m5():
         exist_ok=True
     )
 
-    shutil.copy2(
-        SALES_SOURCE,
-        sales_output
-    )
+    # Copy the validated chunked Parquet file unchanged.
+    shutil.copy2(SALES_SOURCE, sales_output)
 
     copied_rows = pq.ParquetFile(
         sales_output
@@ -307,17 +366,17 @@ def run_m5():
     print(f"fact_sales rows: {copied_rows:,}")
 
     # ------------------------------------------------------
-    # 6. VALIDATE ALL FIVE CANONICAL ENTITIES
+    # 6. VALIDATE ALL FIVE ENTITIES
     # ------------------------------------------------------
 
     print("\n[6/6] Final M5 entity validation...")
 
     entity_files = {
-        "dim_date": output / "dim_date" / "part-00000.parquet",
-        "dim_product": output / "dim_product" / "part-00000.parquet",
-        "dim_store": output / "dim_store" / "part-00000.parquet",
-        "fact_sell_prices": output / "fact_sell_prices" / "part-00000.parquet",
-        "fact_sales": output / "fact_sales" / "part-00000.parquet",
+        "dim_date": OUTPUT / "dim_date" / "part-00000.parquet",
+        "dim_product": OUTPUT / "dim_product" / "part-00000.parquet",
+        "dim_store": OUTPUT / "dim_store" / "part-00000.parquet",
+        "fact_sell_prices": OUTPUT / "fact_sell_prices" / "part-00000.parquet",
+        "fact_sales": OUTPUT / "fact_sales" / "part-00000.parquet",
     }
 
     for entity, file_path in entity_files.items():
@@ -334,28 +393,30 @@ def run_m5():
             f"{file_path.stat().st_size / (1024 * 1024):.2f} MB"
         )
 
-    # Sales key uniqueness, checked without loading all rows into RAM.
-    import duckdb
-
+    # Validate fact_sales source key uniqueness.
     con = duckdb.connect()
 
-    sales_path = str(
-        entity_files["fact_sales"].resolve()
-    ).replace("\\", "/").replace("'", "''")
-
-    duplicate_sales_keys = con.execute(
-        f"""
-        SELECT COUNT(*)
-        FROM (
-            SELECT source_record_id, d
-            FROM read_parquet('{sales_path}')
-            GROUP BY source_record_id, d
-            HAVING COUNT(*) > 1
+    try:
+        sales_path = (
+            str(entity_files["fact_sales"].resolve())
+            .replace("\\", "/")
+            .replace("'", "''")
         )
-        """
-    ).fetchone()[0]
 
-    con.close()
+        duplicate_sales_keys = con.execute(
+            f"""
+            SELECT COUNT(*)
+            FROM (
+                SELECT source_record_id, d
+                FROM read_parquet('{sales_path}')
+                GROUP BY source_record_id, d
+                HAVING COUNT(*) > 1
+            )
+            """
+        ).fetchone()[0]
+
+    finally:
+        con.close()
 
     if duplicate_sales_keys:
         raise ValueError(
@@ -366,6 +427,7 @@ def run_m5():
     print("fact_sales duplicate-key groups: 0")
 
     print("\n========== M5 ETL COMPLETED SUCCESSFULLY ==========")
+    print("Curated M5 output:", OUTPUT)
 
 
 if __name__ == "__main__":
