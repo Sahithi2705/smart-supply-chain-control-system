@@ -13,7 +13,9 @@ import { ForecastResponse } from '../types/forecast';
 import { InventoryResponse } from '../types/inventory';
 import { RiskAlertsResponse } from '../types/risk';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000';
+export const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ||
+  'https://olg6qmo9if.execute-api.ap-south-1.amazonaws.com';
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,

@@ -1,17 +1,15 @@
+
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import {
-  Bell,
   User,
   LogOut,
   Activity,
-  CheckCircle2,
-  XCircle,
   Shield,
   ExternalLink,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { checkApiHealth } from '../services/api';
+import { API_BASE_URL, checkApiHealth } from '../services/api';
 
 const ROUTE_TITLES: Record<string, { title: string; subtitle: string }> = {
   '/': { title: 'Overview', subtitle: 'Executive visibility and multi-module control tower telemetry' },
@@ -34,6 +32,7 @@ export const TopNav: React.FC = () => {
   // Poll backend health indicator
   useEffect(() => {
     let isMounted = true;
+
     async function checkHealth() {
       try {
         const res = await checkApiHealth();
@@ -42,8 +41,10 @@ export const TopNav: React.FC = () => {
         if (isMounted) setApiConnected(false);
       }
     }
+
     checkHealth();
-    const interval = setInterval(checkHealth, 30000); // 30s heartbeat
+    const interval = setInterval(checkHealth, 30000);
+
     return () => {
       isMounted = false;
       clearInterval(interval);
@@ -77,24 +78,30 @@ export const TopNav: React.FC = () => {
         {/* API Health Indicator */}
         <div
           className="flex items-center gap-2 px-2.5 py-1 rounded-full bg-navy-950 border border-navy-800 text-[11px] font-mono"
-          title={`Backend API at http://127.0.0.1:8000 is ${
+          title={`Backend API at ${API_BASE_URL} is ${
             apiConnected ? 'connected' : apiConnected === false ? 'unreachable' : 'checking...'
           }`}
         >
           {apiConnected === true ? (
             <>
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-emerald-400 font-medium hidden md:inline">API: 127.0.0.1:8000</span>
+              <span className="text-emerald-400 font-medium hidden md:inline">
+                API Connected
+              </span>
             </>
           ) : apiConnected === false ? (
             <>
               <span className="w-2 h-2 rounded-full bg-rose-500" />
-              <span className="text-rose-400 font-medium hidden md:inline">API Disconnected</span>
+              <span className="text-rose-400 font-medium hidden md:inline">
+                API Disconnected
+              </span>
             </>
           ) : (
             <>
               <span className="w-2 h-2 rounded-full bg-slate-500" />
-              <span className="text-slate-400 hidden md:inline">Connecting...</span>
+              <span className="text-slate-400 hidden md:inline">
+                Connecting...
+              </span>
             </>
           )}
         </div>
@@ -112,7 +119,9 @@ export const TopNav: React.FC = () => {
               <div className="text-xs font-medium text-slate-200 truncate max-w-[120px]">
                 {user?.username || 'Operator'}
               </div>
-              <div className="text-[10px] text-slate-500 font-mono">Cognito Auth</div>
+              <div className="text-[10px] text-slate-500 font-mono">
+                Cognito Auth
+              </div>
             </div>
           </button>
 
@@ -122,8 +131,12 @@ export const TopNav: React.FC = () => {
               onMouseLeave={() => setUserMenuOpen(false)}
             >
               <div className="px-4 py-2 border-b border-navy-800/80">
-                <div className="text-xs font-semibold text-white truncate">{user?.username}</div>
-                <div className="text-[11px] text-slate-400 truncate">{user?.email || 'Authenticated Cognito User'}</div>
+                <div className="text-xs font-semibold text-white truncate">
+                  {user?.username}
+                </div>
+                <div className="text-[11px] text-slate-400 truncate">
+                  {user?.email || 'Authenticated Cognito User'}
+                </div>
                 <div className="mt-1 flex items-center gap-1 text-[10px] text-brand-cyan font-mono">
                   <Shield className="w-3 h-3" />
                   <span>Pool: ap-south-1_gqD253QfU</span>
@@ -139,8 +152,9 @@ export const TopNav: React.FC = () => {
                   <Activity className="w-3.5 h-3.5 text-slate-400" />
                   <span>System & Auth Settings</span>
                 </Link>
+
                 <a
-                  href="http://127.0.0.1:8000/docs"
+                  href={`${API_BASE_URL}/docs`}
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center justify-between px-4 py-2 text-slate-300 hover:bg-navy-850 hover:text-white"
@@ -149,7 +163,9 @@ export const TopNav: React.FC = () => {
                     <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
                     <span>FastAPI OpenAPI Docs</span>
                   </span>
-                  <span className="font-mono text-[10px] text-slate-500">:8000</span>
+                  <span className="font-mono text-[10px] text-slate-500">
+                    API
+                  </span>
                 </a>
               </div>
 

@@ -303,7 +303,7 @@ export const LoginPage: React.FC = () => {
           </div>
           <div className="flex items-center justify-between">
             <span>Backend API</span>
-            <span className="text-slate-400">http://127.0.0.1:8000</span>
+            <span className="text-slate-400">{import.meta.env.VITE_API_BASE_URL || 'https://olg6qmo9if.execute-api.ap-south-1.amazonaws.com'}</span>
           </div>
         </div>
       </div>

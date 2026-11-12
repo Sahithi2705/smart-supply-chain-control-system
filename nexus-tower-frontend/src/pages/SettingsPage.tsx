@@ -195,7 +195,7 @@ export const SettingsPage: React.FC = () => {
           <div className="p-3 bg-navy-950 border border-navy-800 rounded-lg">
             <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Target URL</span>
             <span className="text-white font-semibold mt-1 block">
-              {import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000'}
+              {import.meta.env.VITE_API_BASE_URL || 'https://olg6qmo9if.execute-api.ap-south-1.amazonaws.com'}
             </span>
           </div>
 
@@ -233,7 +233,7 @@ export const SettingsPage: React.FC = () => {
         <div className="flex items-center justify-between text-xs text-slate-400 pt-2">
           <span>FastAPI Documentation:</span>
           <a
-            href="http://127.0.0.1:8000/docs"
+            href={`${import.meta.env.VITE_API_BASE_URL || 'https://olg6qmo9if.execute-api.ap-south-1.amazonaws.com'}/docs`}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-1 text-brand-cyan hover:underline"
